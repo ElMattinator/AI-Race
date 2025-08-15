@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0f2b">
+  <title>AI‑Race • A27 Tycoon (Prototype)</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <style>
+    :root{--bg:#0a0f2b;--panel:#11183e;--card:#1a2258;--ink:#e8ecff;--muted:#a7b0e0;--accent:#7cf;--shadow:0 10px 30px rgba(0,0,0,.35);--radius:20px;--good:#46d37d;--warn:#ffcc66;--bad:#ff6b6b}
+    *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif}
+    main{max-width:980px;margin:0 auto;padding:max(16px,env(safe-area-inset-top)) 16px 32px}
+    header{display:flex;align-items:center;justify-content:space-between;margin:8px 0 16px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(160deg,#6de,#25a);box-shadow:var(--shadow);display:grid;place-items:center}
+    .logo svg{filter:drop-shadow(0 6px 12px rgba(0,0,0,.25))}
+    .title h1{margin:0;font-size:20px} .title small{color:var(--muted)}
+    .toolbar{display:flex;gap:8px}
+    .btn{appearance:none;border:none;border-radius:14px;padding:10px 14px;background:#24307a;color:var(--ink);box-shadow:var(--shadow);font-weight:600}
+    .btn:active{transform:translateY(1px)}
+    .panel{background:var(--panel);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.06)}
+    .grid{display:grid;gap:14px} @media(min-width:820px){.grid{grid-template-columns:1.1fr .9fr}}
+    .resources{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .kpi{background:var(--card);border-radius:16px;padding:12px;border:1px solid rgba(255,255,255,.06)}
+    .kpi h3{margin:0 0 6px;font-size:12px;color:var(--muted);font-weight:600} .kpi .val{font-size:20px;font-weight:800}
+    .kpi .bar{height:8px;border-radius:8px;background:#0d1438;margin-top:8px;overflow:hidden}
+    .kpi .bar>i{display:block;height:100%;background:linear-gradient(90deg,#7cf,#6de)}
+    .board{display:grid;gap:12px}
+    .card{background:var(--card);border-radius:20px;padding:14px;border:1px solid rgba(255,255,255,.06);box-shadow:var(--shadow)}
+    .card h2{margin:0 0 6px;font-size:16px}
+    .news{display:flex;gap:8px;overflow:auto;padding-bottom:6px}
+    .chip{background:#202a66;border:1px solid rgba(255,255,255,.08);padding:8px 10px;border-radius:999px;white-space:nowrap;color:var(--muted)}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .action{flex:1;min-width:140px;background:#24307a;border:1px solid rgba(255,255,255,.08);padding:12px;border-radius:16px;text-align:center;font-weight:700}
+    .action:active{transform:translateY(1px)}
+    .event .options{display:grid;gap:10px}
+    .option{background:#27358e;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:12px}
+    .option .effects{color:var(--muted);font-size:12px;margin-top:6px}
+    dialog{border:none;border-radius:20px;background:var(--card);color:var(--ink);max-width:640px;width:92%;box-shadow:var(--shadow)}
+    dialog::backdrop{background:rgba(0,0,32,.55);backdrop-filter:saturate(130%) blur(2px)}
+    .advisors{display:grid;gap:10px}
+    .advisor{display:grid;grid-template-columns:48px 1fr;gap:10px;align-items:center;background:#202a66;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:10px}
+    .avatar{width:48px;height:48px;border-radius:14px;background:linear-gradient(160deg,#7cf,#25a);display:grid;place-items:center;color:#001}
+    .i{font-size:22px;font-weight:900} .hint{color:var(--muted);font-size:12px}
+    .lang{background:#202a66;border:1px solid rgba(255,255,255,.08);color:var(--ink);padding:10px;border-radius:12px}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2l3.1 5.9 6.5.9-4.7 4.6 1.1 6.4L12 17l-5.9 3.1 1.1-6.4L2.5 8.8l6.5-.9L12 2z" fill="white" opacity=".9"/>
+        </svg>
+      </div>
+      <div class="title">
+        <h1>AI‑Race</h1>
+        <small id="subtitle">Prototype – Monat <span id="month">07/2026</span></small>
+      </div>
+    </div>
+    <div class="toolbar">
+      <select id="lang" class="lang" aria-label="Sprache">
+        <option value="de">Deutsch</option>
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+      </select>
+      <button class="btn" id="btnAdvisors">Berater</button>
+    </div>
+  </header>
+
+  <section class="panel">
+    <div class="resources">
+      <div class="kpi"><h3 id="kpi_money_label">Geld</h3><div class="val" id="kpi_money">$312M</div><div class="bar"><i style="width:72%"></i></div></div>
+      <div class="kpi"><h3 id="kpi_power_label">Rechenpower</h3><div class="val" id="kpi_power">14k GPUs</div><div class="bar"><i style="width:45%"></i></div></div>
+      <div class="kpi"><h3 id="kpi_risk_label">Risiken</h3><div class="val" id="kpi_risk">37</div><div class="bar"><i style="width:37%"></i></div></div>
+    </div>
+  </section>
+
+  <section class="board">
+    <div class="card">
+      <h2 id="goals_title">Ziele</h2>
+      <div class="news" id="goals">
+        <div class="chip">Superhuman Coder vorbereiten</div>
+        <div class="chip">Audit bestehen</div>
+        <div class="chip">Series D sichern</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 id="event_title">Senatsanhörung in 10 Tagen</h2>
+      <p id="event_body">Eine Anhörung steht an. Wie offen möchten wir auftreten?</p>
+      <div class="event options">
+        <div class="option">
+          <strong id="opt1_label">Durchziehen</strong>
+          <div class="effects" id="opt1_effects">Ruf +5 / Risiko −2 / Fortschritt −1</div>
+          <div class="actions">
+            <button class="btn" data-choice="transparent" id="btnOpt1">Wählen</button>
+            <button class="btn" id="btnOpt1Ad">Pro/Contra</button>
+          </div>
+        </div>
+        <div class="option">
+          <strong id="opt2_label">Abwarten</strong>
+          <div class="effects" id="opt2_effects">Regulatoren +2 / Risiko ±0 / Fortschritt ±0</div>
+          <div class="actions">
+            <button class="btn" data-choice="cautious" id="btnOpt2">Wählen</button>
+            <button class="btn" id="btnOpt2Ad">Pro/Contra</button>
+          </div>
+        </div>
+      </div>
+      <p class="hint" id="hint_simple">Tipp: Tippe auf „Pro/Contra“, um Berater mit einfacher Erklärung zu hören.</p>
+    </div>
+  </section>
+
+  <dialog id="dlgAdvisors">
+    <form method="dialog">
+      <h3 id="advisor_title">Berater-Meinungen</h3>
+      <div class="advisors" id="advisorList"></div>
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px">
+        <button class="btn" value="cancel" id="closeAdvisors">Schliessen</button>
+      </div>
+    </form>
+  </dialog>
+</main>
+
+<script>
+const i18n = {
+  de:{money:"Geld",power:"Rechenpower",risk:"Risiken",goals:"Ziele",
+      eventTitle:(d)=>`Senatsanhörung in ${d} Tagen`,eventBody:"Eine Anhörung steht an. Wie offen möchten wir auftreten?",
+      opt1:"Durchziehen",opt1fx:"Ruf +5 / Risiko −2 / Fortschritt −1",
+      opt2:"Abwarten",opt2fx:"Regulatoren +2 / Risiko ±0 / Fortschritt ±0",
+      advisorsTitle:"Berater-Meinungen",hint:"Tipp: Tippe auf „Pro/Contra“, um Berater mit einfacher Erklärung zu hören.",
+      btnChoose:"Wählen",btnProCon:"Pro/Contra",
+      advisors:[
+        {name:"Chefingenieur",bias:"Tempo",pro:"Schneller Start – vor der Konkurrenz.",con:"Kostet Rechenpower und Teamzeit."},
+        {name:"Sicherheitschefin",bias:"Sicherheit",pro:"Mehr Tests = weniger Risiken.",con:"Wir werden etwas langsamer."},
+        {name:"PR-Berater",bias:"Öffentlichkeit",pro:"Transparenz baut Vertrauen auf.",con:"Zu früh reden kann schaden."}
+      ]},
+  en:{money:"Money",power:"Compute",risk:"Risks",goals:"Goals",
+      eventTitle:(d)=>`Senate hearing in ${d} days`,eventBody:"A hearing is coming up. How open should we be?",
+      opt1:"Go ahead",opt1fx:"Public +5 / Risk −2 / Progress −1",
+      opt2:"Hold back",opt2fx:"Regulators +2 / Risk ±0 / Progress ±0",
+      advisorsTitle:"Advisor Opinions",hint:"Tip: Tap “Pros/Cons” to hear advisors in simple language.",
+      btnChoose:"Choose",btnProCon:"Pros/Cons",
+      advisors:[
+        {name:"Chief Engineer",bias:"Speed",pro:"Faster launch – ahead of rivals.",con:"Consumes compute and team time."},
+        {name:"Head of Safety",bias:"Safety",pro:"More tests = fewer risks.",con:"We lose some speed."},
+        {name:"PR Advisor",bias:"Public",pro:"Transparency builds trust.",con:"Speaking too early can backfire."}
+      ]},
+  fr:{money:"Argent",power:"Puissance de calcul",risk:"Risques",goals:"Objectifs",
+      eventTitle:(d)=>`Audition au Sénat dans ${d} jours`,eventBody:"Une audition approche. Jusqu'où allons-nous en transparence ?",
+      opt1:"Continuer",opt1fx:"Public +5 / Risque −2 / Progrès −1",
+      opt2:"Attendre",opt2fx:"Régulateurs +2 / Risque ±0 / Progrès ±0",
+      advisorsTitle:"Avis des conseillers",hint:"Astuce : Touchez « Pour/Contre » pour des avis en langage simple.",
+      btnChoose:"Choisir",btnProCon:"Pour/Contre",
+      advisors:[
+        {name:"Ingénieur en chef",bias:"Vitesse",pro:"Lancement rapide – devant les rivaux.",con:"Consomme du calcul et du temps d'équipe."},
+        {name:"Cheffe Sécurité",bias:"Sécurité",pro:"Plus de tests = moins de risques.",con:"On perd un peu de vitesse."},
+        {name:"Conseiller RP",bias:"Public",pro:"La transparence inspire confiance.",con:"Parler trop tôt peut se retourner contre nous."}
+      ]}
+};
+
+let lang = localStorage.getItem("a27_lang") || "de";
+const $ = (q)=>document.querySelector(q);
+const set = (id,val)=>{ const el=document.getElementById(id); if(el) el.textContent=val; };
+
+function applyLang(){
+  const L=i18n[lang]; set("kpi_money_label",L.money); set("kpi_power_label",L.power); set("kpi_risk_label",L.risk);
+  set("goals_title",L.goals); set("event_title",L.eventTitle(10)); set("event_body",L.eventBody);
+  set("opt1_label",L.opt1); set("opt1_effects",L.opt1fx); set("opt2_label",L.opt2); set("opt2_effects",L.opt2fx);
+  set("advisor_title",L.advisorsTitle); set("hint_simple",L.hint);
+  $("#btnOpt1").textContent=L.btnChoose; $("#btnOpt2").textContent=L.btnChoose;
+  $("#btnOpt1Ad").textContent=L.btnProCon; $("#btnOpt2Ad").textContent=L.btnProCon;
+  $("#lang").value=lang;
+}
+
+function showAdvisors(){
+  const L=i18n[lang]; const list=$("#advisorList"); list.innerHTML="";
+  L.advisors.forEach(a=>{
+    const el=document.createElement("div"); el.className="advisor";
+    el.innerHTML=`<div class="avatar"><div class="i">★</div></div>
+      <div><div style="display:flex;justify-content:space-between;gap:10px;align-items:center">
+        <strong>${a.name}</strong><small class="hint">${a.bias}</small></div>
+        <div>Pro: ${a.pro}</div><div class="hint">Contra: ${a.con}</div></div>`;
+    list.appendChild(el);
+  });
+  $("#dlgAdvisors").showModal();
+}
+function pick(choice){
+  if(choice==="transparent"){ set("kpi_risk","35"); } else { set("kpi_risk","37"); }
+  const chip=document.createElement("div"); chip.className="chip";
+  chip.textContent=(choice==="transparent") ?
+    (lang==="de"?"Transparenzpaket beschlossen":lang==="fr"?"Paquet de transparence adopté":"Transparency package adopted")
+    : (lang==="de"?"Vorsichtige Linie bestätigt":lang==="fr"?"Ligne prudente confirmée":"Cautious line confirmed");
+  $("#goals").appendChild(chip); window.scrollTo({top:0,behavior:"smooth"});
+}
+
+$("#btnAdvisors").addEventListener("click",showAdvisors);
+$("#btnOpt1Ad").addEventListener("click",showAdvisors);
+$("#btnOpt2Ad").addEventListener("click",showAdvisors);
+$("#btnOpt1").addEventListener("click",()=>pick("transparent"));
+$("#btnOpt2").addEventListener("click",()=>pick("cautious"));
+$("#lang").addEventListener("change",(e)=>{ lang=e.target.value; localStorage.setItem("a27_lang",lang); applyLang(); });
+applyLang();
+
+// Service worker only on GitHub Pages (HTTPS, correct scope)
+if(location.protocol==="https:" || location.hostname==="localhost"){
+  if("serviceWorker" in navigator){
+    navigator.serviceWorker.register("./sw.js");
+  }
+}
+</script>
+</body>
+</html>
