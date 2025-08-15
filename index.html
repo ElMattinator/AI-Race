@@ -1,1 +1,298 @@
-<!doctype html><html><body><h1>AI Race v2 - Demo</h1></body></html>
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0f2b">
+  <title>AI‑Race • A27 Tycoon (Prototype)</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="data:image/png;base64,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">
+  <style>
+    :root{
+      --bg:#0a0f2b; --panel:rgba(17,24,62,.85); --card:rgba(26,34,88,.9);
+      --ink:#e8ecff; --muted:#a7b0e0; --accent:#7cf; --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:20px; --good:#46d37d; --warn:#ffcc66; --bad:#ff6b6b;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,BlinkMacSystemFont,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif}
+    body::before{
+      content:"";position:fixed;inset:0;z-index:-1;opacity:.5;
+      background:center/cover no-repeat url('data:image/svg+xml;utf8,<?xml version="1.0"?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0%' stop-color='%230a0f2b'/><stop offset='100%' stop-color='%231a2270'/></linearGradient></defs><rect width='1600' height='900' fill='url(%23g)'/><g fill='%23141c46' opacity='0.9'><rect x='20' y='480' width='60' height='420'/><rect x='110' y='520' width='80' height='380'/><rect x='220' y='500' width='70' height='400'/><rect x='320' y='540' width='90' height='360'/><rect x='440' y='515' width='70' height='385'/><rect x='520' y='545' width='92' height='355'/><rect x='640' y='525' width='70' height='375'/><rect x='720' y='505' width='70' height='395'/><rect x='820' y='545' width='85' height='355'/><rect x='925' y='520' width='70' height='380'/><rect x='1010' y='500' width='60' height='400'/><rect x='1100' y='535' width='80' height='365'/><rect x='1200' y='515' width='70' height='385'/><rect x='1290' y='545' width='90' height='355'/><rect x='1400' y='525' width='60' height='375'/></g><rect x='0' y='660' width='1600' height='240' fill='%232a2014'/></svg>');
+    }
+    main{max-width:980px;margin:0 auto;padding:max(16px,env(safe-area-inset-top)) 16px 32px}
+    header{display:flex;align-items:center;justify-content:space-between;margin:8px 0 16px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(160deg,#6de,#25a);box-shadow:var(--shadow);display:grid;place-items:center}
+    .title h1{margin:0;font-size:20px} .title small{color:var(--muted)}
+    .toolbar{display:flex;gap:8px}
+    .btn{appearance:none;border:none;border-radius:14px;padding:10px 14px;background:#24307a;color:var(--ink);box-shadow:var(--shadow);font-weight:600}
+    .btn:active{transform:translateY(1px)}
+    .panel{backdrop-filter: blur(10px) saturate(120%);background:var(--panel);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.06)}
+    .grid{display:grid;gap:14px}
+    @media(min-width:820px){.grid{grid-template-columns:1.1fr .9fr}}
+    .resources{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .kpi{display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:center;background:var(--card);border-radius:16px;padding:12px;border:1px solid rgba(255,255,255,.06)}
+    .kpi h3{margin:0 0 2px;font-size:12px;color:var(--muted);font-weight:600} .kpi .val{font-size:20px;font-weight:800}
+    .kpi .bar{height:8px;border-radius:8px;background:#0d1438;margin-top:6px;overflow:hidden}
+    .kpi .bar>i{display:block;height:100%;background:linear-gradient(90deg,#7cf,#6de)}
+    .board{display:grid;gap:12px}
+    .card{backdrop-filter: blur(10px) saturate(120%);background:var(--card);border-radius:20px;padding:14px;border:1px solid rgba(255,255,255,.06);box-shadow:var(--shadow)}
+    .card h2{margin:0 0 6px;font-size:16px}
+    .news{display:flex;gap:8px;overflow:auto;padding-bottom:6px}
+    .chip{background:#202a66;border:1px solid rgba(255,255,255,.08);padding:8px 10px;border-radius:999px;white-space:nowrap;color:var(--muted)}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .action{flex:1;min-width:140px;background:#24307a;border:1px solid rgba(255,255,255,.08);padding:12px;border-radius:16px;text-align:center;font-weight:700}
+    .option{background:#27358e;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:12px}
+    .option .effects{color:var(--muted);font-size:12px;margin-top:6px}
+    dialog{border:none;border-radius:20px;background:var(--card);color:var(--ink);max-width:720px;width:92%;box-shadow:var(--shadow)}
+    dialog::backdrop{background:rgba(0,0,32,.55);backdrop-filter:saturate(130%) blur(2px)}
+    .advisors{display:grid;gap:10px}
+    .advisor{display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:center;background:#202a66;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:10px}
+    .avatar{width:56px;height:56px;border-radius:14px;overflow:hidden;background:#1a2258}
+    .avatar img{width:100%;height:100%;display:block;object-fit:cover}
+    .hint{color:var(--muted);font-size:12px}
+    .lang{background:#202a66;border:1px solid rgba(255,255,255,.08);color:var(--ink);padding:10px;border-radius:12px}
+    .icon{width:48px;height:48px;border-radius:12px;overflow:hidden}
+    .icon img{display:block;width:100%;height:100%;object-fit:cover}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2l3.1 5.9 6.5.9-4.7 4.6 1.1 6.4L12 17l-5.9 3.1 1.1-6.4L2.5 8.8l6.5-.9L12 2z" fill="white" opacity=".9"/>
+        </svg>
+      </div>
+      <div class="title">
+        <h1>AI‑Race</h1>
+        <small id="subtitle">Prototype – Monat <span id="month">07/2026</span></small>
+      </div>
+    </div>
+    <div class="toolbar">
+      <select id="lang" class="lang" aria-label="Sprache">
+        <option value="de">Deutsch</option>
+        <option value="en">English</option>
+      </select>
+      <button class="btn" id="btnAdvisors">Berater</button>
+    </div>
+  </header>
+
+  <section class="panel">
+    <div class="resources">
+      <div class="kpi"><div class="icon"><img id="icMoney" alt=""></div><div><h3 id="kpi_money_label">Geld</h3><div class="val" id="kpi_money">$312M</div><div class="bar"><i style="width:72%"></i></div></div></div>
+      <div class="kpi"><div class="icon"><img id="icPower" alt=""></div><div><h3 id="kpi_power_label">Rechenpower</h3><div class="val" id="kpi_power">14k GPUs</div><div class="bar"><i style="width:45%"></i></div></div></div>
+      <div class="kpi"><div class="icon"><img id="icRisk" alt=""></div><div><h3 id="kpi_risk_label">Risiken</h3><div class="val" id="kpi_risk">37</div><div class="bar"><i style="width:37%"></i></div></div></div>
+    </div>
+  </section>
+
+  <section class="board">
+    <div class="card">
+      <h2 id="goals_title">Ziele</h2>
+      <div class="news" id="goals">
+        <div class="chip">Superhuman Coder vorbereiten</div>
+        <div class="chip">Audit bestehen</div>
+        <div class="chip">Series D sichern</div>
+      </div>
+    </div>
+
+    <div class="card" id="eventCard">
+      <h2 id="event_title">Senatsanhörung in 10 Tagen</h2>
+      <p id="event_body">Eine Anhörung steht an. Wie offen möchten wir auftreten?</p>
+      <div class="event options">
+        <div class="option">
+          <strong id="opt1_label">Durchziehen</strong>
+          <div class="effects" id="opt1_effects">Ruf +5 / Risiko −2 / Fortschritt −1</div>
+          <div class="actions">
+            <button class="btn" data-choice="transparent" id="btnOpt1">Wählen</button>
+            <button class="btn" id="btnOpt1Ad">Pro/Contra</button>
+          </div>
+        </div>
+        <div class="option">
+          <strong id="opt2_label">Abwarten</strong>
+          <div class="effects" id="opt2_effects">Regulatoren +2 / Risiko ±0 / Fortschritt ±0</div>
+          <div class="actions">
+            <button class="btn" data-choice="cautious" id="btnOpt2">Wählen</button>
+            <button class="btn" id="btnOpt2Ad">Pro/Contra</button>
+          </div>
+        </div>
+      </div>
+      <p class="hint" id="hint_simple">Tipp: Tippe auf „Pro/Contra“, um Berater mit einfacher Erklärung zu hören.</p>
+    </div>
+  </section>
+
+  <dialog id="dlgAdvisors">
+    <form method="dialog">
+      <h3 id="advisor_title">Berater‑Meinungen</h3>
+      <div class="advisors" id="advisorList"></div>
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px">
+        <button class="btn" value="cancel" id="closeAdvisors">Schliessen</button>
+      </div>
+    </form>
+  </dialog>
+</main>
+
+<script>
+const ICON_MONEY = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect rx="12" width="64" height="64" fill="%231a2278"/><path d="M26 10h12v44H26zM16 28h32v8H16z" fill="white"/></svg>';
+const ICON_POWER = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect rx="12" width="64" height="64" fill="%231a2278"/><rect x="14" y="14" width="36" height="36" fill="none" stroke="white" stroke-width="4"/><g stroke="white" stroke-width="4"><line x1="8" y1="12" x2="8" y2="20"/><line x1="56" y1="12" x2="56" y2="20"/><line x1="8" y1="44" x2="8" y2="52"/><line x1="56" y1="44" x2="56" y2="52"/></g></svg>';
+const ICON_RISK = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect rx="12" width="64" height="64" fill="%231a2278"/><polygon points="32,8 58,52 6,52" fill="%23ff6b6b"/><rect x="29" y="26" width="6" height="16" fill="black"/><circle cx="32" cy="46" r="3" fill="black"/></svg>';
+
+function avatarSVG(bg, hair){
+  return "data:image/svg+xml;utf8,"+encodeURIComponent(
+    "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>"
+    +"<rect rx='12' width='64' height='64' fill='"+bg+"'/>"
+    +"<circle cx='32' cy='30' r='16' fill='%23ffe6c8'/>"
+    +"<path d='M18 26 Q32 12 46 26 L44 18 L20 18 Z' fill='"+hair+"'/>"
+    +"<circle cx='26' cy='30' r='2.6' fill='black'/>"
+    +"<circle cx='38' cy='30' r='2.6' fill='black'/>"
+    +"<path d='M24 36 Q32 42 40 36' stroke='%23733' stroke-width='2.5' fill='none'/>"
+    +"<rect x='18' y='42' width='28' height='14' rx='6' fill='%2379a5ff'/>"
+    +"</svg>"
+  );
+}
+const AV_CTO = avatarSVG('#7cd4ff','#2661b5');
+const AV_SAFE = avatarSVG('#b7ffb3','#199e7d');
+const AV_PR = avatarSVG('#ffd2aa','#c47828');
+
+const SVG_BG = encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0%' stop-color='%230a0f2b'/><stop offset='100%' stop-color='%231a2270'/></linearGradient></defs><rect width='1600' height='900' fill='url(%23g)'/><g fill='%23141c46' opacity='0.9'><rect x='20' y='480' width='60' height='420'/><rect x='110' y='520' width='80' height='380'/><rect x='220' y='500' width='70' height='400'/><rect x='320' y='540' width='90' height='360'/><rect x='440' y='515' width='70' height='385'/><rect x='520' y='545' width='92' height='355'/><rect x='640' y='525' width='70' height='375'/><rect x='720' y='505' width='70' height='395'/><rect x='820' y='545' width='85' height='355'/><rect x='925' y='520' width='70' height='380'/><rect x='1010' y='500' width='60' height='400'/><rect x='1100' y='535' width='80' height='365'/><rect x='1200' y='515' width='70' height='385'/><rect x='1290' y='545' width='90' height='355'/><rect x='1400' y='525' width='60' height='375'/></g><rect x='0' y='660' width='1600' height='240' fill='%232a2014'/></svg>");
+// inject svg bg
+document.head.innerHTML = document.head.innerHTML.replace("<?xml version="1.0"?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0%' stop-color='%230a0f2b'/><stop offset='100%' stop-color='%231a2270'/></linearGradient></defs><rect width='1600' height='900' fill='url(%23g)'/><g fill='%23141c46' opacity='0.9'><rect x='20' y='480' width='60' height='420'/><rect x='110' y='520' width='80' height='380'/><rect x='220' y='500' width='70' height='400'/><rect x='320' y='540' width='90' height='360'/><rect x='440' y='515' width='70' height='385'/><rect x='520' y='545' width='92' height='355'/><rect x='640' y='525' width='70' height='375'/><rect x='720' y='505' width='70' height='395'/><rect x='820' y='545' width='85' height='355'/><rect x='925' y='520' width='70' height='380'/><rect x='1010' y='500' width='60' height='400'/><rect x='1100' y='535' width='80' height='365'/><rect x='1200' y='515' width='70' height='385'/><rect x='1290' y='545' width='90' height='355'/><rect x='1400' y='525' width='60' height='375'/></g><rect x='0' y='660' width='1600' height='240' fill='%232a2014'/></svg>", SVG_BG);
+
+// State & i18n
+const i18n = {
+  de: {
+    money:"Geld", power:"Rechenpower", risk:"Risiken", goals:"Ziele",
+    advisorsTitle:"Berater‑Meinungen",
+    hint:"Tipp: Tippe auf „Pro/Contra“, um Berater mit einfacher Erklärung zu hören.",
+    btnChoose:"Wählen", btnProCon:"Pro/Contra",
+    advisors:[
+      {name:"Chefingenieur", bias:"Tempo", avatar:AV_CTO, pro:"Schneller Start – vor der Konkurrenz.", con:"Kostet Rechenpower und Teamzeit."},
+      {name:"Sicherheitschefin", bias:"Sicherheit", avatar:AV_SAFE, pro:"Mehr Tests = weniger Risiken.", con:"Wir werden etwas langsamer."},
+      {name:"PR‑Berater", bias:"Öffentlichkeit", avatar:AV_PR, pro:"Transparenz baut Vertrauen auf.", con:"Zu früh reden kann schaden."}
+    ],
+    scenes:[
+      {
+        id:"hearing", title:(d)=>`Senatsanhörung in ${d} Tagen`, body:"Wie treten wir auf?",
+        opt1:"Transparenzpaket ankündigen", opt1fx:"Publikum +5 / Risiko −2 / Tempo −1",
+        opt2:"Zurückhaltend bleiben", opt2fx:"Regulatoren +2 / neutral",
+        effects1: {risk:-2, reputationPublic:+5, progress:-1}, effects2: {regulators:+2}
+      },
+      {
+        id:"gpu", title:()=>"Großer Rechenvertrag", body:"Langfristiger Deal mit günstigen Preisen.",
+        opt1:"Vertrag unterschreiben", opt1fx:"Geld −10 / Rechenpower +8 / Risiko −1",
+        opt2:"Ablehnen", opt2fx:"keine Änderung",
+        effects1: {money:-10, power:+8, risk:-1}, effects2: {}
+      },
+      {
+        id:"release", title:()=>"Produkt‑Release", body:"Bringen wir unseren Code‑Assistenten raus?",
+        opt1:"Jetzt launchen", opt1fx:"Geld +12 / Risiko +2 / Ruf ±",
+        opt2:"Nach weiteren Tests", opt2fx:"Tempo −1 / Risiko −1",
+        effects1: {money:+12, risk:+2}, effects2: {risk:-1, progress:-1}
+      }
+    ]
+  },
+  en: {
+    money:"Money", power:"Compute", risk:"Risks", goals:"Goals",
+    advisorsTitle:"Advisor opinions",
+    hint:"Tip: Tap “Pros/Cons” to hear advisors in simple language.",
+    btnChoose:"Choose", btnProCon:"Pros/Cons",
+    advisors:[
+      {name:"Chief Engineer", bias:"Speed", avatar:AV_CTO, pro:"Faster launch – ahead of rivals.", con:"Consumes compute and team time."},
+      {name:"Head of Safety", bias:"Safety", avatar:AV_SAFE, pro:"More tests = fewer risks.", con:"We lose some speed."},
+      {name:"PR Advisor", bias:"Public", avatar:AV_PR, pro:"Transparency builds trust.", con:"Speaking too early can backfire."}
+    ],
+    scenes:[
+      {
+        id:"hearing", title:(d)=>`Senate hearing in ${d} days`, body:"How should we show up?",
+        opt1:"Announce transparency package", opt1fx:"Public +5 / Risk −2 / Speed −1",
+        opt2:"Stay cautious", opt2fx:"Regulators +2 / neutral",
+        effects1: {risk:-2, reputationPublic:+5, progress:-1}, effects2: {regulators:+2}
+      },
+      {
+        id:"gpu", title:()=>"Big compute contract", body:"Long‑term capacity at a discount.",
+        opt1:"Sign the contract", opt1fx:"Money −10 / Compute +8 / Risk −1",
+        opt2:"Decline", opt2fx:"no change",
+        effects1: {money:-10, power:+8, risk:-1}, effects2: {}
+      },
+      {
+        id:"release", title:()=>"Product release", body:"Ship our code assistant?",
+        opt1:"Launch now", opt1fx:"Money +12 / Risk +2 / Rep ±",
+        opt2:"Test more first", opt2fx:"Speed −1 / Risk −1",
+        effects1: {money:+12, risk:+2}, effects2: {risk:-1, progress:-1}
+      }
+    ]
+  }
+};
+
+let lang = localStorage.getItem("a27_lang") || "de";
+const $ = (q)=>document.querySelector(q);
+const set = (id,val)=>{ const el=document.getElementById(id); if(el) el.textContent=val; };
+const state = { money:312, power:14, risk:37, progress:0, month:7, sceneIndex:0 };
+
+function applyLang(){
+  const L=i18n[lang];
+  set("kpi_money_label",L.money); set("kpi_power_label",L.power); set("kpi_risk_label",L.risk);
+  set("goals_title",L.goals);
+  $("#btnOpt1").textContent=L.btnChoose; $("#btnOpt2").textContent=L.btnChoose;
+  $("#btnOpt1Ad").textContent=L.btnProCon; $("#btnOpt2Ad").textContent=L.btnProCon;
+  $("#btnAdvisors").textContent=lang==="de"?"Berater":"Advisors";
+  $("#lang").value=lang;
+  $("#icMoney").src = ICON_MONEY; $("#icPower").src=ICON_POWER; $("#icRisk").src=ICON_RISK;
+  renderScene();
+}
+
+function renderAdvisors(){
+  const L=i18n[lang]; const list=$("#advisorList"); list.innerHTML="";
+  L.advisors.forEach(a=>{
+    const el=document.createElement("div"); el.className="advisor";
+    el.innerHTML=`<div class="avatar"><img src="${a.avatar}" alt=""></div>
+      <div><div style="display:flex;justify-content:space-between;gap:10px;align-items:center">
+        <strong>${a.name}</strong><small class="hint">${a.bias}</small></div>
+        <div>Pro: ${a.pro}</div><div class="hint">Contra: ${a.con}</div></div>`;
+    list.appendChild(el);
+  });
+}
+
+function renderScene(){
+  const L=i18n[lang]; const S=L.scenes[state.sceneIndex];
+  set("event_title", typeof S.title==="function" ? S.title(10) : S.title);
+  set("event_body", S.body);
+  set("opt1_label", S.opt1); set("opt1_effects", S.opt1fx);
+  set("opt2_label", S.opt2); set("opt2_effects", S.opt2fx);
+  set("kpi_money", "$"+state.money+"M"); set("kpi_power", state.power+"k GPUs"); set("kpi_risk", String(state.risk));
+}
+
+function applyEffects(eff){
+  if(eff.money) state.money += eff.money;
+  if(eff.power) state.power += eff.power;
+  if(eff.risk!==undefined) state.risk = Math.max(0, state.risk + eff.risk);
+  if(eff.progress) state.progress += eff.progress;
+}
+
+function choose(which){
+  const L=i18n[lang]; const S=L.scenes[state.sceneIndex];
+  applyEffects(which==="opt1" ? (S.effects1||{}) : (S.effects2||{}));
+  const chip=document.createElement("div"); chip.className="chip";
+  chip.textContent = which==="opt1" ? (lang==="de"?"Option A gewählt":"Chose A") : (lang==="de"?"Option B gewählt":"Chose B");
+  $("#goals").appendChild(chip);
+  state.sceneIndex = (state.sceneIndex+1) % L.scenes.length;
+  renderScene();
+  localStorage.setItem("a27_state", JSON.stringify(state));
+}
+
+document.getElementById("btnAdvisors").addEventListener("click", ()=>{ renderAdvisors(); document.getElementById("dlgAdvisors").showModal(); });
+document.getElementById("closeAdvisors").addEventListener("click", ()=>document.getElementById("dlgAdvisors").close());
+document.getElementById("btnOpt1Ad").addEventListener("click", ()=>{ renderAdvisors(); document.getElementById("dlgAdvisors").showModal(); });
+document.getElementById("btnOpt2Ad").addEventListener("click", ()=>{ renderAdvisors(); document.getElementById("dlgAdvisors").showModal(); });
+document.getElementById("btnOpt1").addEventListener("click", ()=>choose("opt1"));
+document.getElementById("btnOpt2").addEventListener("click", ()=>choose("opt2"));
+document.getElementById("lang").addEventListener("change",(e)=>{ lang=e.target.value; localStorage.setItem("a27_lang",lang); applyLang(); });
+
+try{ const s=localStorage.getItem("a27_state"); if(s) Object.assign(state, JSON.parse(s)); }catch{}
+applyLang();
+
+if(location.protocol==="https:" || location.hostname==="localhost"){ if("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js"); }
+</script>
+</body>
+</html>
